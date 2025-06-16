@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      docker: 18
+    commands:
+      - echo Installing AFL++...
+      - git clone https://github.com/AFLplusplus/AFLplusplus.git
+      - cd AFLplusplus && make distrib
+  build:
+    commands:
+      - echo Compiling fuzz targets...
+      - cd $CODEBUILD_SRC_DIR/vuln_sources/
+      - clang -fsanitize=address -fno-omit-frame-pointer -g -o vuln_binary vuln_buffer_overflow.c
+      - echo Starting AFL++ fuzzing job...
+      - cd ../AFLplusplus
+      - ./afl-fuzz -i ../inputs -o ../outputs -- ../vuln_sources/vuln_binary @@
+artifacts:
+  files:
+    - '**/*'
+  base-directory: 'outputs'
