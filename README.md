@@ -37,3 +37,5 @@ This project simulates a full zero-day discovery and mitigation lifecycle with r
 ![image](https://github.com/user-attachments/assets/11152437-c6ae-4776-9c51-97b8e9670f4b)
 
 ![image](https://github.com/user-attachments/assets/227c3a78-8549-4ff7-8f18-889b74ff7d7e)
+
+facing error - cant upload more screenshots currently, but will be uploaded in future
