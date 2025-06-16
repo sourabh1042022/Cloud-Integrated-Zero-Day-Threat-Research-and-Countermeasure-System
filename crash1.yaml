@@ -1,0 +1,5 @@
+sample: crash1
+classification: CRASH
+features:
+  entropy: 0.87
+  size: 1200
