@@ -17,6 +17,5 @@ y = ["CRASH", "CRASH", "SAFE", "SAFE", "HANG", "HANG"]
 model = DecisionTreeClassifier()
 model.fit(X, y)
 
-
 joblib.dump(model, "triage_model.pkl")
 print("Model trained and saved.")
