@@ -1,0 +1,3 @@
+[HOOKED execve] → "/bin/ls"
+[HOOKED execve] → "/usr/bin/whoami"
+[HOOKED execve] → "/usr/bin/nmap"
