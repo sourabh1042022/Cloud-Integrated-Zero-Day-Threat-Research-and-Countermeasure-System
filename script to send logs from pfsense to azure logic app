@@ -1,0 +1,12 @@
+echo > /usr/local/bin/send_suricata_alerts.sh
+echo 'LOG_FILE="/var/log/suricata/suricata_em143528/eve.json"' >> /usr/local/bin/send_suricata_alerts.sh
+echo 'WEBHOOK_URL="https://prod-34.eastus.logic.azure.com:443/workflows/9fc01ad08ad54f82974f0e142ef1abd0/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=cNrrWHQAndUsEGbMCx6dgJj82E7aGXG1ib4nPN56GUA"' >> /usr/local/bin/send_suricata_alerts.sh
+echo 'tail -Fn0 "$LOG_FILE" | while read -r line; do' >> /usr/local/bin/send_suricata_alerts.sh
+echo '  echo "$line" | grep -q "\"event_type\":\"alert\""' >> /usr/local/bin/send_suricata_alerts.sh
+echo '  if [ $? -eq 0 ]; then' >> /usr/local/bin/send_suricata_alerts.sh
+echo '    echo "Sending alert to Azure..."' >> /usr/local/bin/send_suricata_alerts.sh
+echo '    curl -s -X POST "$WEBHOOK_URL" \' >> /usr/local/bin/send_suricata_alerts.sh
+echo '      -H "Content-Type: application/json" \' >> /usr/local/bin/send_suricata_alerts.sh
+echo '      -d "$line" > /dev/null' >> /usr/local/bin/send_suricata_alerts.sh
+echo '  fi' >> /usr/local/bin/send_suricata_alerts.sh
+echo 'done' >> /usr/local/bin/send_suricata_alerts.sh 
