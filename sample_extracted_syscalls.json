@@ -1,0 +1,7 @@
+{
+  "extracted_syscalls": [
+    "Syscall at: 0040103A in function syscall_wrapper",
+    "Syscall at: 004010B2 in function evil_exec",
+    "Syscall at: 00401222 in function hidden_loader"
+  ]
+}
