@@ -1,0 +1,37 @@
+# Binary Patch Notes
+
+This document lists the applied binary patches for known issues discovered during fuzzing and syscall analysis.
+
+---
+
+## 1. `vuln_buffer_overflow.c` (Buffer Overflow Patch)
+**Issue:** Unbounded `strcpy` call
+**Patch:** Replaced with `strncpy(buffer, input, sizeof(buffer) - 1);`
+
+---
+
+## 2. `syscall_test_linux.c` (Hardening)
+**Issue:** Raw syscall usage
+**Patch:** Wrapped syscall call in a safety check to validate syscall number range.
+
+---
+
+## 3. Legacy FTP Server Binary (simulated)
+**Issue:** Directory traversal vulnerability via `..//..`
+**Patch:** Input sanitization applied; directory paths normalized before execution.
+
+---
+
+## 4. Sample PE file
+**Issue:** Uninitialized stack variable causing undefined behavior.
+**Patch:** All local variables zeroed at declaration.
+
+---
+
+## 5. Loader stub
+**Issue:** RWX memory mapping enabled for shellcode execution.
+**Patch:** Recompiled with `-Wl,-z,noexecstack -fstack-protector-strong`.
+
+---
+
+These patches were applied and binaries recompiled for safety verification.
